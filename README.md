@@ -1,4 +1,5 @@
-# M346_TC_FT_TB
+## Projekt M346 Tiziano Corbetti, Franziska Tobler, Tibor Blasko
+## CMS - Content Management System auf AWS - Amazon Web Services
 
 Dieses Repository dient als Ablage der Dokumentation und Skripts.   
 Alle Dateien beziehen sich auf das Projekt im Modul 346.
