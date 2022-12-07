@@ -1,7 +1,7 @@
 #!/bin/bash
 
-aws ec2 create-vpc --name "cms-vpc" --cidr-block 10.0.0.0/16 --region "us-east-1" --dns_support "yes" --dns_hostnames "yes" --instance-tenancy "default" --state "present" --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_webserver}]'
-
+aws ec2 create-vpc --cidr-block 10.0.0.0/16 --region "us-east-1" --instance-tenancy "default" --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=vpc_cms_webserver}]'
+aws ec2 create-internet-gateway 
 # key erstellen
 aws ec2 create-key-pair --key-name cms_key --key-type rsa --query 'KeyMaterial' --output text > ~/.ssh/cms_key.pem
 # security group erstellen
