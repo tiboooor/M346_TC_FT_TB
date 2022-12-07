@@ -1,4 +1,4 @@
-## Projekt M346 Tiziano Corbetti, Franziska Tobler, Tibor Blasko
+# Projekt M346 Tiziano Corbetti, Franziska Tobler, Tibor Blasko
 ## CMS - Content Management System auf AWS - Amazon Web Services
 
 Dieses Repository dient als Ablage der Dokumentation und Skripts.   
