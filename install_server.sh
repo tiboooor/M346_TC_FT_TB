@@ -31,9 +31,9 @@ aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type
 # direcory für inital datei von webserver
 mkdir ~/ec2cmsdbserver
 cd ~/ec2cmsdbserver
-# inital datei für webserverinstallation
+# inital datei für dbinstallation
 touch initial.txt
-echo "#!/bin/bash\nsudo apt-get update\nsudo apt-get -y install apache2" > initial.txt
+echo "#!/bin/bash\nsudo apt-get update\nsudo apt-get -y install mariadb" > initial.txt
 # erstellen von EC2 instance
 aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --private-ip-adress 10.0.1.200 --security-groups cms-sec-group --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'
 
