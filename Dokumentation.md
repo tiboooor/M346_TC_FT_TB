@@ -8,7 +8,7 @@ In diesem Markdown wird das gesamte Projekt dokumentiert und beschrieben. In den
 **1. Projektinformationen**  
 **1.1 CMS**  
 **1.2 Aufgaben und Zuständigkeit**  
-**2. Installation**  
+**2. Installation und Konfiguration**  
 **3. Testfälle**  
 
 ## 1. Projektinformationen
@@ -20,4 +20,10 @@ Wir haben uns für Wordpress entschieden, da wir bereits einmal mit diesem CMS g
 
 ### 1.2 Aufgaben und Zuständigkeit
 Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte schlussendlich automatisiert werden. Die Aufgaben haben wir untereinander so verteilt.
+
+## 2. Installation und Konfiguration
+
+
+## 3. Testfälle
+
 
