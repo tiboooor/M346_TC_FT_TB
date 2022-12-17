@@ -1,7 +1,10 @@
 #!/bin/bash
 
-aws ec2 create-vpc --cidr-block 10.0.0.0/16 --region "us-east-1" --instance-tenancy "default" --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=vpc_cms_webserver}]'
+vpc_id=aws ec2 create-vpc --cidr-block 10.0.0.0/16 --region "us-east-1" --instance-tenancy "default" --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=vpc_cms_webserver}]'--output text
 aws ec2 create-internet-gateway --region "us-east-1"  --tag-specifications 'ResourceType=internet-gateway,Tags=[{Key=Name,Value=igw_cms_webserver}]'
+
+vpc_id=${aws ec2 describe-vpcs --query "vpcs[?CidrBlock=='10.0.0.0/16'].VpcId" --output text}
+igw_id=${aws ec2 describe-internet-gateways --query "vpcs[?CidrBlock=='10.0.0.0/16'].InternetGatewayId" --output text}
 
 aws ec2 attach-internet-gateway --internet-gateway-id "[InternetGatewayId]" --vpc-id "[VpcId]"
 
@@ -27,14 +30,14 @@ cd ~/ec2cmswebserver
 touch initial.txt
 echo "#!/bin/bash\nsudo apt-get update\nsudo apt-get -y install apache2" > initial.txt
 # erstellen von EC2 instance
-aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --private-ip-adress 10.0.1.100 --security-groups cms-sec-group --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_webserver}]'
+aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instsance-type t2.micro --key-name cms_key --private-ip-adress 10.0.1.100 --security-groups cms-sec-group --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_webserver}]'
 # direcory für inital datei von webserver
 mkdir ~/ec2cmsdbserver
 cd ~/ec2cmsdbserver
 # inital datei für dbinstallation
 touch initial.txt
 echo "#!/bin/bash\nsudo apt-get update\nsudo apt-get -y install mariadb" > initial.txt
-# erstellen von EC2 instance
+# erstellen von EC2 instances
 aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --private-ip-adress 10.0.1.200 --security-groups cms-sec-group --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'
 
 chmod 600 ~/.ssh/cms_key.pem
