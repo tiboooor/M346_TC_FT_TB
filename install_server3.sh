@@ -18,7 +18,22 @@ mkdir ~/ec2cmsdbserver
 cd ~/ec2cmsdbserver
 # inital datei für dbinstallation
 touch initial.txt
-echo "#!/bin/bash\nsudo apt-get update\nsudo apt-get -y install mariadb-server\nsudo systemctl start mariadb.service" > initial.txt
+{
+    echo '#!/bin/bash'
+    echo ''
+    echo 'sudo apt update'
+    echo 'sudo apt install mariadb-server -y'
+    echo 'sudo systemctl start mariadb.service'
+    echo ''
+    echo 'mysql -u root -p -e "CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password'";'
+    echo 'mysql -u root -p -e "CREATE DATABASE `wordpress`;"'
+    echo 'mysql -u root -p -e "GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpressusr'@'%';"'
+    echo 'mysql -u root -p -e "FLUSH PRIVILEGES;"'
+    echo ''
+    echo ''
+    echo ''
+} >> initial.txt
+#echo "#!/bin/bash\nsudo apt-get update\nsudo apt-get -y install mariadb-server\nsudo systemctl start mariadb.service" > initial.txt
 # erstellen von EC2 instances
 aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'
 INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=cms_dataserver" --query 'Reservations[*].Instances[*].InstanceId' --output text)
