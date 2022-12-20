@@ -18,22 +18,29 @@ mkdir ~/ec2cmsdbserver
 cd ~/ec2cmsdbserver
 # inital datei für dbinstallation
 touch initial.txt
-{
-    echo '#!/bin/bash'
-    echo ''
-    echo 'sudo apt update'
-    echo 'sudo apt install -y mariadb-server'
-    echo 'sudo apt install -y mariadb-client'
-    echo 'sudo systemctl start mariadb.service'
-    echo ''
-    echo 'mysql -u root -p -e "CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password'";'
-    echo 'mysql -u root -p -e "CREATE DATABASE `wordpress`;"'
-    echo 'mysql -u root -p -e "GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpressusr'@'%';"'
-    echo 'mysql -u root -p -e "FLUSH PRIVILEGES;"'
-} > initial.txt
-#echo "#!/bin/bash\nsudo apt-get update\nsudo apt-get -y install mariadb-server\nsudo systemctl start mariadb.service" > initial.txt
+cat > initial.txt << LAH
+#!/bin/bash
+
+sudo apt update
+sudo apt install -y mariadb-server
+sudo apt install -y mariadb-client
+sudo systemctl start mariadb.service
+# touch commands.sql
+# sudo chmod 777 commands.sql
+# cat > commands.sql << WAHM
+# CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password';
+# CREATE DATABASE `wordpress`;
+# GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpressusr'@'%';
+# FLUSH PRIVILEGES;
+# WHAM
+# sudo mysql -u root -p > commands.sql
+sudo mysql -uroot -p -e "CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password';"
+sudo mysql -uroot -p -e "CREATE DATABASE `wordpress`;"
+sudo mysql -uroot -p -e "GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpressusr'@'%';"
+sudo mysql -uroot -p -e "FLUSH PRIVILEGES;"
+LAH
 # erstellen von EC2 instances
-aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial1.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'
+aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'
 INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=cms_dataserver" --query 'Reservations[*].Instances[*].InstanceId' --output text)
 PRIVATE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text)
 
@@ -53,13 +60,14 @@ sudo apt install php php-mysql -y
 
 wget https://wordpress.org/latest.tar.gz
 tar xzf latest.tar.gz
-sudo cp -R wordpress /var/www/html/
-sudo chown -R www-data:www-data /var/www/html/wordpress/
-sudo chmod -R 755 /var/www/html/wordpress/
-sudo mkdir /var/www/html/wordpress/wp-content/uploads
-sudo chown -R www-data:www-data /var/www/html/wordpress/wp-content/uploads/
+sudo cp -R wordpress /var/www/
+sudo chown -R www-data:www-data /var/www/wordpress/
+sudo chmod -R 755 /var/www/wordpress/
+sudo mkdir /var/www/wordpress/wp-content/uploads
+sudo chown -R www-data:www-data /var/www/wordpress/wp-content/uploads/
+table_prefix='$table_prefix'
 
-cd /var/www/html
+cd /var/www/wordpress
 sudo touch wp-config.php
 sudo cat > wp-config.php << EOF
 <?php
@@ -158,13 +166,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
 EOF
+sudo chmod 755 wp-config.php
+cd /etc/apache2/sites-available
+sudo touch wordpress.conf
+sudo chmod 666 wordpress.conf
+sudo cat > wordpress.conf << FOO
+<VirtualHost *:80>
+        DocumentRoot /var/www/wordpress
+</VirtualHost>
+FOO
+sudo a2ensite wordpress.conf
+sudo a2dissite 000-default.conf
+sudo systemctl restart apache2
 END
 
 
 # erstellen von EC2 instance
 aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_webserver}]'
-INSTANCE_ID2=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=cms_webserver" --query 'Reservations[*].Instances[*].InstanceId' --output text)
-PRIVATE_IP2=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID2 --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text)
 
 chmod 600 ~/.ssh/cms_key.pem
 
