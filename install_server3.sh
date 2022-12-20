@@ -25,19 +25,22 @@ sudo apt update
 sudo apt install -y mariadb-server
 sudo apt install -y mariadb-client
 sudo systemctl start mariadb.service
-# touch commands.sql
-# sudo chmod 777 commands.sql
-# cat > commands.sql << WAHM
-# CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password';
-# CREATE DATABASE `wordpress`;
-# GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpressusr'@'%';
-# FLUSH PRIVILEGES;
-# WHAM
-# sudo mysql -u root -p > commands.sql
-sudo mysql -uroot -p -e "CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password';"
-sudo mysql -uroot -p -e "CREATE DATABASE `wordpress`;"
-sudo mysql -uroot -p -e "GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpressusr'@'%';"
-sudo mysql -uroot -p -e "FLUSH PRIVILEGES;"
+sudo sed 's/bind-address            = 127.0.0.1/#bind-address            = 127.0.0.1/' /etc/mysql/mariadb.conf.d/50-server.cnf
+touch commands.sql
+sudo chmod 777 commands.sql
+cat > commands.sql << WAHM
+DROP USER 'wordpressust'@'%';
+FLUSH PRIVILEGES;
+CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password';
+CREATE DATABASE `wordpress`;
+GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpressusr'@'%';
+FLUSH PRIVILEGES;
+WHAM
+sudo mysql -u root -p mysql > commands.sql
+# sudo mysql -u root -p -e "CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password';"
+# sudo mysql -u root -p -e "CREATE DATABASE wordpress;"
+# sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressusr'@'%';"
+# sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
 LAH
 # erstellen von EC2 instances
 aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'
@@ -57,6 +60,7 @@ sudo apt update
 sudo apt install -y apache2
 
 sudo apt install php php-mysql -y
+sudo apt install mysql-client -y
 
 wget https://wordpress.org/latest.tar.gz
 tar xzf latest.tar.gz
