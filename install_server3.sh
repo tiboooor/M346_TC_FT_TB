@@ -40,9 +40,10 @@ PRIVATE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Res
 # direcory für inital datei von webserver
 mkdir ~/ec2cmswebserver
 cd ~/ec2cmswebserver
-# inital datei für webserverinstallation
+# initial datei für webserverinstallation
 touch initial.txt
-sudo cat  << END > inital.txt
+table_prefix='$table_prefix'
+cat > initial.txt << END 
 #!/bin/bash
 
 sudo apt update
@@ -60,7 +61,7 @@ sudo chown -R www-data:www-data /var/www/html/wordpress/wp-content/uploads/
 
 cd /var/www/html
 sudo touch wp-config.php
-sudo cat << EOF > wp-config.php
+sudo cat > wp-config.php << EOF
 <?php
 /**
  * The base configuration for WordPress
@@ -111,14 +112,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define( 'AUTH_KEY',         'put your unique phrase here' );
-define( 'SECURE_AUTH_KEY',  'put your unique phrase here' );
-define( 'LOGGED_IN_KEY',    'put your unique phrase here' );
-define( 'NONCE_KEY',        'put your unique phrase here' );
-define( 'AUTH_SALT',        'put your unique phrase here' );
-define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
-define( 'LOGGED_IN_SALT',   'put your unique phrase here' );
-define( 'NONCE_SALT',       'put your unique phrase here' );
+define( 'AUTH_KEY',         '8osX70IonLV3A9Mlu0WVg0oGLzz5MgJMpHVz8zitckP1SsteKXHxqY1fXpvaJwlk' );
+define( 'SECURE_AUTH_KEY',  'pSoIDaYURWoYUD8RTBv1kCgv3jorJABv9EKpufdsNrJhNRPhOaeIyLmHQ1w83b1k' );
+define( 'LOGGED_IN_KEY',    'ZyKbAhQBspTJqXhAZuDMiuFDZWv3ggXT10PTaQwaiyhRGDde6rcCflgmiBjEftHk' );
+define( 'NONCE_KEY',        'laInXuVinVfGvJu4NmNGIQyLunXcI7lmpOAacxH4DY679AK2uBxG5ImsY9SRCW0E' );
+define( 'AUTH_SALT',        'vQGSNyXiR6N4CGHWg7wYkM8o9u7cD3iVyNHyhfimqQd7lwpJiHrWEBTQb7VNVJtY' );
+define( 'SECURE_AUTH_SALT', '6jtnSkO6yi4mhyqkyAVWx41rNNtgZ2igStAxriOjZR6uZE75AFLzHtwnGwJR3s6Q' );
+define( 'LOGGED_IN_SALT',   'fp4Fu1qtu2ng0rb2vmDTqMUCsxQgyrc26V9SPKjwlmxDZF6doQ2gHppzGABrcQ1W' );
+define( 'NONCE_SALT',       'KXyKEi1lnLAQBOPUTu0TFreTELb65H5PmnophtDZTZdeFaphfgxMRsb44iq08sGW' );
 
 /**#@-*/
 
