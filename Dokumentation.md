@@ -24,7 +24,7 @@ Wir haben uns für Wordpress entschieden, da wir bereits einmal mit diesem CMS g
 
 <a name="anker2"></a>
 ### 1.2 Aufgaben und Zuständigkeit
-Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte schlussendlich automatisiert werden. Die Aufgaben haben wir untereinander so verteilt.
+Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte letztendlich automatisiert werden. Da wir zu dritt sind geht es mit der Arbeit ziemlich gut auf. Wir haben uns so aufgeteilt das sich jemand mit aws ausseinander setzt, ein weiterer kümmert sich vorallem um die Scripte und letztlich kümmert sich jemand um das Git. Schlussendlich waren dies nur Rollen, dass was eigentlich getan wurde hat sich oft und manchmal extrem unterschieden.  
 
 <a name="anker3"></a>
 ## 2. Installation und Konfiguration
@@ -44,5 +44,11 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstel
   
   
 <a name="anker6"></a>
-## 5. Reflexion
-
+## 5. Reflexion  
+**Tibor Blasko**  
+Das Projekt an sich, bzw. das Konzept ist sehr interessant. Die Themen sind ebenfalls alle spannend. Wir haben auch bereits im Unterricht mit AWS CLI gearbeitet, womit wir auch beim Projekt gearbeitet haben. Jedoch kam das Projekt viel zu kurzfristig und war meiner Meinung nach für diese Zeitspanne vom Umfang her zu komplex. Das hat beim SQL-Projekt besser funktioniert.  
+  
+**Franziska Tobler**  
+    
+     
+**Tiziano Corbetti**
