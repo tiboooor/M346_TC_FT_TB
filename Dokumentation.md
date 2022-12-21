@@ -12,7 +12,7 @@ In diesem Markdown wird das gesamte Projekt dokumentiert und beschrieben. In den
 [**2. Installation und Konfiguration**](#anker3)  
 [**3. Anleitung**](#anker4)  
 [**4. Testfälle**](#anker5)  
-[**5. Reflexion**] (#anker6)
+[**5. Reflexion**](#anker6)
 <a name="anker"></a>
 ## 1. Projektinformationen
 In diesem Abschnitt wird die Wahl des CMS beschrieben und die verschiedenen Aufgaben aufgezählt und wer Zuständigkeit für was hat.  
