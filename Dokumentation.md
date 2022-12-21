@@ -37,7 +37,10 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstel
   
   
 <a name="anker5"></a>
-## 4. Testfälle
+## 4. Testfälle  
+**Testfall 1**  
+Dieses Skript wurde 2 Mal überarbeitet. Es ist die erste Version und ich habe mich stark an einer Aufgabe von Unterricht gehalten.  
+
 [Testfall 1](install_server.sh)
 
 [Testfall 2](install_server2.sh)
