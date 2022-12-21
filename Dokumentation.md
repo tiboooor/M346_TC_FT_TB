@@ -44,5 +44,11 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstel
   
   
 <a name="anker6"></a>
-## 5. Reflexion
-
+## 5. Reflexion  
+Tibor Blasko  
+Das Projekt an sich, bzw. das Konzept ist sehr interessant. Die Themen sind ebenfalls alle spannend. Wir haben auch bereits im Unterricht mit AWS CLI gearbeitet, womit wir auch beim Projekt gearbeitet haben. Jedoch kam das Projekt viel zu kurzfristig und war meiner Meinung nach für diese Zeitspanne vom Umfang her zu komplex. Das hat beim SQL-Projekt besser funktioniert.  
+  
+Franziska Tobler  
+    
+     
+Tiziano Corbetti
