@@ -1,22 +1,25 @@
 #!/bin/bash
+# Autor: Franziska Tobler
+# Hauptquelle: https://docs.aws.amazon.com/cli/latest/index.html
 
-# key erstellen
+# Key-Pair erstellen, dieser Key wird für beide Server verwendet
 aws ec2 create-key-pair --key-name cms_key --key-type rsa --query 'KeyMaterial' --output text > ~/.ssh/cms_key.pem
-# security group  erstellen
+# Security Group erstellen
 aws ec2 create-security-group --group-name sec-group-cms --description "SSH and HTTP and 3306"
+# ID der Security Group in die Variable sec_id schreiben
 sec_id=$(aws ec2 describe-security-groups --filters "Name=group-name,Values=sec-group-cms" --query 'SecurityGroups[*].{ID:GroupId}' --output text)
 
-# security group  auf Ports autorisieren
+# security group  auf Ports 80, 22, 3306 und -1 autorisieren
 aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 80 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 22 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 3306 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol icmp --port -1 --cidr 0.0.0.0/0
 
 
-# direcory für inital datei von webserver
+# Directory für die Initial.txt Datei des Datenbankservers
 mkdir ~/ec2cmsdbserver
 cd ~/ec2cmsdbserver
-# inital datei für dbinstallation
+# erstellen der inital Datei und befüllen mit Inhalt
 touch initial.txt
 cat > initial.txt << LAH
 #!/bin/bash
@@ -25,32 +28,30 @@ sudo apt update
 sudo apt install -y mariadb-server
 sudo apt install -y mariadb-client
 sudo systemctl start mariadb.service
-sudo sed 's/bind-address            = 127.0.0.1/#bind-address            = 127.0.0.1/' /etc/mysql/mariadb.conf.d/50-server.cnf
-touch commands.sql
+sudo sed -i "s/bind-address            = 127.0.0.1/#bind-address            = 127.0.0.1/" /etc/mysql/mariadb.conf.d/50-server.cnf
+sudo systemctl restart mariadb.service
+sudo touch commands.sql
 sudo chmod 777 commands.sql
-cat > commands.sql << WAHM
-DROP USER 'wordpressust'@'%';
+sudo cat > commands.sql << WHAM
+DROP USER IF EXISTS 'wordpressusr'@'%';
 FLUSH PRIVILEGES;
-CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password';
-CREATE DATABASE `wordpress`;
-GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpressusr'@'%';
+CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'pacozazi99';
+DROP DATABASE IF EXISTS wordpress;
+CREATE DATABASE wordpress;
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressusr'@'%';
 FLUSH PRIVILEGES;
 WHAM
-sudo mysql -u root -p mysql > commands.sql
-# sudo mysql -u root -p -e "CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password';"
-# sudo mysql -u root -p -e "CREATE DATABASE wordpress;"
-# sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressusr'@'%';"
-# sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
+sudo mysql < commands.sql
 LAH
-# erstellen von EC2 instances
+# erstellen der EC2 instances des Datenbankservers
 aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'
 INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=cms_dataserver" --query 'Reservations[*].Instances[*].InstanceId' --output text)
-PRIVATE_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].PrivateIpAddress' --output text)
+PUBLIC_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
 
-# direcory für inital datei von webserver
+# Directory für die Initial.txt Datei des Webservers
 mkdir ~/ec2cmswebserver
 cd ~/ec2cmswebserver
-# initial datei für webserverinstallation
+# erstellen der inital Datei und befüllen mit Inhalt
 touch initial.txt
 table_prefix='$table_prefix'
 cat > initial.txt << END 
@@ -102,10 +103,10 @@ define( 'DB_NAME', 'wordpress' );
 define( 'DB_USER', 'wordpressusr' );
 
 /** Database password */
-define( 'DB_PASSWORD', 'your_secure_password' );
+define( 'DB_PASSWORD', 'pacozazi99' );
 
 /** Database hostname */
-define( 'DB_HOST', '$PRIVATE_IP' );
+define( 'DB_HOST', '$PUBLIC_IP' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
@@ -185,8 +186,7 @@ sudo systemctl restart apache2
 END
 
 
-# erstellen von EC2 instance
+# erstellen von EC2 instance des Webservers
 aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_webserver}]'
-
+# Berechtigung des Keys anpassen
 chmod 600 ~/.ssh/cms_key.pem
-
