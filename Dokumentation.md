@@ -38,7 +38,9 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstel
   
 <a name="anker5"></a>
 ## 4. Testfälle
-  
+[Testfall 1](install_server.sh)
+
+[Testfall 2](install_server2.sh)
   
   
 <a name="anker6"></a>
