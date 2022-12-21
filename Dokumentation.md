@@ -28,7 +28,7 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstel
 
 <a name="anker3"></a>
 ## 2. Installation und Konfiguration
-> **Hinweis:** Dies ist ein Test  
+[Finale Version des Scriptes](install_server3.sh) 
   
 
 
