@@ -30,7 +30,7 @@ sudo apt install -y mariadb-client
 sudo systemctl start mariadb.service
 sudo sed -i "s/bind-address            = 127.0.0.1/#bind-address            = 127.0.0.1/" /etc/mysql/mariadb.conf.d/50-server.cnf
 sudo systemctl restart mariadb.service
-sudo touch ~/commands.sql
+sudo touch commands.sql
 sudo cat > commands.sql << WHAM
 DROP USER IF EXISTS 'wordpressusr'@'%';
 FLUSH PRIVILEGES;
@@ -40,7 +40,7 @@ CREATE DATABASE wordpress;
 GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressusr'@'%';
 FLUSH PRIVILEGES;
 WHAM
-sudo mysql < ~/commands.sql
+sudo mysql < commands.sql
 LAH
 # erstellen der EC2 instances des Datenbankservers
 aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'
