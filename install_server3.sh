@@ -28,22 +28,19 @@ sudo apt update
 sudo apt install -y mariadb-server
 sudo apt install -y mariadb-client
 sudo systemctl start mariadb.service
-sudo sed 's/bind-address            = 127.0.0.1/#bind-address            = 127.0.0.1/' /etc/mysql/mariadb.conf.d/50-server.cnf
+sudo sed "s/bind-address            = 127.0.0.1/#bind-address            = 127.0.0.1/" /etc/mysql/mariadb.conf.d/50-server.cnf
 touch ~/commands.sql
 sudo chmod 777 commands.sql
-cat > commands.sql << WAHM
-DROP USER 'wordpressust'@'%';
+cat > commands.sql << WHAM
+DROP USER IF EXISTS 'wordpressusr'@'%';
 FLUSH PRIVILEGES;
 CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'pacozazi99';
-CREATE DATABASE `wordpress`;
-GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpressusr'@'%';
+DROP DATABASE IF EXISTS wordpress;
+CREATE DATABASE wordpress;
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressusr'@'%';
 FLUSH PRIVILEGES;
 WHAM
-sudo mysql -u root -p"\n" mysql < ~/commands.sql
-# sudo mysql -u root -p -e "CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'pacozazi99';"
-# sudo mysql -u root -p -e "CREATE DATABASE wordpress;"
-# sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressusr'@'%';"
-# sudo mysql -u root -p -e "FLUSH PRIVILEGES;"
+sudo mysql < ~/commands.sql
 LAH
 # erstellen der EC2 instances des Datenbankservers
 aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'
@@ -108,7 +105,7 @@ define( 'DB_USER', 'wordpressusr' );
 define( 'DB_PASSWORD', 'pacozazi99' );
 
 /** Database hostname */
-define( 'DB_HOST', '$PRIVATE_IP' );
+define( 'DB_HOST', '$PUBLIC_IP' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8' );
