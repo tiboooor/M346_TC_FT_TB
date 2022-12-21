@@ -28,10 +28,10 @@ sudo apt update
 sudo apt install -y mariadb-server
 sudo apt install -y mariadb-client
 sudo systemctl start mariadb.service
-sudo sed "s/bind-address            = 127.0.0.1/#bind-address            = 127.0.0.1/" /etc/mysql/mariadb.conf.d/50-server.cnf
-touch ~/commands.sql
-sudo chmod 777 commands.sql
-cat > commands.sql << WHAM
+sudo sed -i "s/bind-address            = 127.0.0.1/#bind-address            = 127.0.0.1/" /etc/mysql/mariadb.conf.d/50-server.cnf
+sudo systemctl restart mariadb.service
+sudo touch ~/commands.sql
+sudo cat > commands.sql << WHAM
 DROP USER IF EXISTS 'wordpressusr'@'%';
 FLUSH PRIVILEGES;
 CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'pacozazi99';
