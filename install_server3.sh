@@ -36,7 +36,7 @@ CREATE DATABASE `wordpress`;
 GRANT ALL PRIVILEGES ON `wordpress`.* TO 'wordpressusr'@'%';
 FLUSH PRIVILEGES;
 WHAM
-sudo mysql -u root -p mysql > commands.sql
+sudo mysql -u root -p"/n" mysql > ~/commands.sql
 # sudo mysql -u root -p -e "CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'your_strong_password';"
 # sudo mysql -u root -p -e "CREATE DATABASE wordpress;"
 # sudo mysql -u root -p -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressusr'@'%';"
