@@ -10,7 +10,8 @@ In diesem Markdown wird das gesamte Projekt dokumentiert und beschrieben. In den
 [**1.1 CMS**](#anker1)  
 [**1.2 Aufgaben und Zuständigkeit**](#anker2)  
 [**2. Installation und Konfiguration**](#anker3)  
-[**3. Testfälle**](#anker4)  
+[**3. Anleitung**](#anker4)  
+[**4. Reflexion**](#anker5)  
 <a name="anker"></a>
 ## 1. Projektinformationen
 In diesem Abschnitt wird die Wahl des CMS beschrieben und die verschiedenen Aufgaben aufgezählt und wer Zuständigkeit für was hat.  
@@ -26,40 +27,14 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstel
 
 <a name="anker3"></a>
 ## 2. Installation und Konfiguration
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
+> **Hinweis:** Dies ist ein Test  
+  
+
 
 <a name="anker4"></a>
-## 3. Testfälle
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-test  
-
+## 3. Anleitung  
+  
+  
+<a name="anker5"></a>
+## 4. Reflexion
 
