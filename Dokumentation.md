@@ -30,9 +30,6 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstel
 ## 2. Installation und Konfiguration
 [Finale Version des Scriptes](install_server3.sh) 
   
-### Code Line für Linie erklärt  
-
-  
 
 
 <a name="anker4"></a>
@@ -61,7 +58,7 @@ Hier bitte etwas Zeit geben (ca. 3 min), im Hintergrund wird die Datenbank einge
   
 ### 4. Schritt  
 Die Öffentliche IP-Adresse des "cms_webserver" als http://ip-adresse eingeben. Ihr CMS geniessen.  
-Die Angabe der Sprache und die Erstellung der Seite mit Admin Login gehören zum Aufbau des CMS.  
+Die Angabe der Sprache und die Erstellung der Seite mit Admin Login gehören schon zum Aufbau des CMS.  
   
 ### 5. Anpassungen bei Neustart eines Servers  
 Wenn der Server "cms_dataserver" neu gestartet wird, ändert sich seine IP-Adresse und der Webserver wird eine Fehlermeldung anzeigen.  
@@ -69,22 +66,22 @@ Um die Webseite wieder richtig einzustellen muss folgendes gemacht werden:
 1. Entweder über die AWS Management Console oder über eine SSH verbindung mit "cms_key.pem" eine Verbindung mit dem "cms_webserver" aufbauen.  
 2. Ins Verzeichnis /var/www/wordpress wechseln mit:  
   
-  
-    cd /var/www/wordpress  
-
+```  
+cd /var/www/wordpress
+```  
   
 3. Die Datei "wp-config.php" mit dem bevorzugten Consoleneditor öffnen. Hier mit nano:  
   
+```  
+sudo nano wp-config.php  
+```
   
-    sudo nano wp-config.php
-  
-  
-4. In der Linie:
-  
-  
-    /** Database hostname */  
-    define( 'DB_HOST', '9.240.211.19' );  
-  
+4. In der Linie:  
+
+```  
+/** Database hostname */  
+define( 'DB_HOST', '9.240.211.19' );  
+```
   
 Die alte IP-Adresse zur neuen öffentlichen IP-Adresse des "cms_dataserver" ändern.  
 5. Die Änderungen in nano mit CTRL+O und CTRL+X speichern und schliessen.  
@@ -101,15 +98,13 @@ Auf AWS:
 1. Instanz "cms_webserver"  
 2. Instanz "cms_dataserver"  
 3. Key-Pair "cms_key"  
-4. Security-Group "sec-group-cms"
-  
-  
+4. Security-Group "sec-group-cms"  
 Auf Ubuntumaschine:  
 1. unter ~/ einen Order namens "ec2cmsdbserver"  
 2. unter ~/ einen Order namens "ec2cmswebserver"  
 3. unter ~/.ssh einen Key namens "cms_key.pem"  
   
-Diese Objekte können alle ohne Problem gelöscht werden, um die Security-Group zu löschen muss zuerst sichergestellt sein, dass die Instances komplett terminiert sind.
+Diese Objekte können alle ohne Problem gelöscht werden 
   
 <a name="anker5"></a>
 ## 4. Testfälle  
