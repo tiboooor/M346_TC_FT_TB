@@ -30,6 +30,18 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstel
 ## 2. Installation und Konfiguration
 [Finale Version des Scriptes](install_server3.sh) 
   
+### Code Linie für Linie erklärt  
+```  
+aws ec2 create-key-pair --key-name cms_key --key-type rsa --query 'KeyMaterial' --output text > ~/.ssh/cms_key.pem  
+``` 
+Hier wird ein SSH-Key-Pair erstellt mit dem Key-Type RSA, dieser Key namens "cms_key" wird dann auch noch in eine Datei geschrieben,um von der Ubuntumaschine SSH-Verbindungen aufbauen zu können.  
+```  
+aws ec2 create-security-group --group-name sec-group-cms --description "SSH and HTTP and 3306 and -1"
+```  
+Diese Linie erstellt eine Security-Group mit dem Namen "sec-group-cms".  
+```  
+sec_id=$(aws ec2 describe-security-groups --filters "Name=group-name,Values=sec-group-cms" --query 'SecurityGroups[*].{ID:GroupId}' --output text)
+```  
 
 
 <a name="anker4"></a>
