@@ -30,6 +30,9 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstel
 ## 2. Installation und Konfiguration
 [Finale Version des Scriptes](install_server3.sh) 
   
+### Code Line für Linie erklärt  
+
+  
 
 
 <a name="anker4"></a>
@@ -58,7 +61,7 @@ Hier bitte etwas Zeit geben (ca. 3 min), im Hintergrund wird die Datenbank einge
   
 ### 4. Schritt  
 Die Öffentliche IP-Adresse des "cms_webserver" als http://ip-adresse eingeben. Ihr CMS geniessen.  
-Die Angabe der Sprache und die Erstellung der Seite mit Admin Login gehören schon zum Aufbau des CMS.  
+Die Angabe der Sprache und die Erstellung der Seite mit Admin Login gehören zum Aufbau des CMS.  
   
 ### 5. Anpassungen bei Neustart eines Servers  
 Wenn der Server "cms_dataserver" neu gestartet wird, ändert sich seine IP-Adresse und der Webserver wird eine Fehlermeldung anzeigen.  
