@@ -47,7 +47,7 @@ Bevor das Skript "install_server3.sh" auf einer Ubuntumaschine ausgeführt werde
 ### 2. Schritt
 Skript mit  
   
-        ./install_server3.sh  
+    ./install_server3.sh  
   
 auf der Ubuntumaschine ausführen.  
 Beim Ausführen sollten keine Fehler auftauchen.  
@@ -72,10 +72,10 @@ Versuchter Zugriff mit SSH über Ubuntu Maschiene:
 Dieser Fehler kann verschiedene Ursachen haben. Einer davon ist, dass das Port öffnen in der Security Group nicht richtig gezogen hat.  
 Der Port wurde aber geöffnet und die richtige Security Group dem Server zugeteilt worden:  
   
-        aws ec2 create-security-group --group-name sec-group-cms --vpc-id $vpc_id --description "SSH and HTTP and 3306"  
-        sec_id=$(aws ec2 describe-security-groups --filters "Name=vpc-id,Values=$vpc_id" "Name=group-name,Values=sec-group-cms" --query 'SecurityGroups[*].{ID:GroupId}' --output text)  
-        aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 22 --cidr 0.0.0.0/0  
-        aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --associate-public-ip-address --private-ip-address 10.0.1.20 --subnet-id $subnet_id --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'  
+    aws ec2 create-security-group --group-name sec-group-cms --vpc-id $vpc_id --description "SSH and HTTP and 3306"  
+    sec_id=$(aws ec2 describe-security-groups --filters "Name=vpc-id,Values=$vpc_id" "Name=group-name,Values=sec-group-cms" --query 'SecurityGroups[*].{ID:GroupId}' --output text)  
+    aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 22 --cidr 0.0.0.0/0  
+    aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --associate-public-ip-address --private-ip-address 10.0.1.20 --subnet-id $subnet_id --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'  
   
 Eine andere Ursache könnte eine Falsche konfiguration der VPC (Virtual Private Cloud) im zusammenhang mit IGW (Internet Gateway) und NACL (Network Access Control List) sein.  
 Hier ist zu beachten, dass beim schreiben dieses Skripts einfach Angaben aus der Aufgabe des Unterrichts verwendet wurden. Den ganz genauen Zusammenhang zwischen all diesen Teilen wurde nicht wirklich verstanden.  
@@ -90,7 +90,7 @@ Beim ausführen des Skripts sind schon Fehler aufgetaucht, da es bei der VPC Id 
 ![image](https://github.com/tiboooor/M346_TC_FT_TB/blob/3f30741ac841b9c51327428074b1cc027752eea2/Bilder/Unknown_Option_vpc.PNG)  
 Dieser Fehler bezieht sich ziemlich sicher auf:  
   
-        aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --vpc-id $vpc_id --subnet-id $SUBNET_ID --security-groups cms-sec-group --private-ip-address 172.31.0.100 --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'  
+    aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --vpc-id $vpc_id --subnet-id $SUBNET_ID --security-groups cms-sec-group --private-ip-address 172.31.0.100 --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'  
   
 Die Erstellung des Servers wird nämlich nicht ausgeführt.  
 Nach einigem ausprobieren wurde entschieden ein neues Skript zu schreiben.  
