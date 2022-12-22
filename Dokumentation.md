@@ -36,30 +36,36 @@ Ab hier wird angenommen, dass dieser Code schlussendlich auf einer Ubuntmaschine
 aws ec2 create-key-pair --key-name cms_key --key-type rsa --query 'KeyMaterial' --output text > ~/.ssh/cms_key.pem  
 ``` 
 Hier wird ein SSH-Key-Pair erstellt mit dem Key-Type RSA, dieser Key namens "cms_key" wird dann auch noch in eine Datei geschrieben,um von der Ubuntumaschine SSH-Verbindungen aufbauen zu können.  
+  
 ```  
 aws ec2 create-security-group --group-name sec-group-cms --description "SSH and HTTP and 3306 and -1"
 ```  
 Diese Linie erstellt eine Security-Group mit dem Namen "sec-group-cms".  
+  
 ```  
 sec_id=$(aws ec2 describe-security-groups --filters "Name=group-name,Values=sec-group-cms" --query 'SecurityGroups[*].{ID:GroupId}' --output text)
 ```  
 Hier wird die ID der vorher erstellten Security-Group in eine Variabel geschrieben. Es filtert die Security-Groups nach dem Namen und liest mit dem Query die ID aus.  
+  
 ```  
 aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 80 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 22 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 3306 --cidr 0.0.0.0/0
 aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol icmp --port -1 --cidr 0.0.0.0/0
 ```  
-Hier werden die Ports autorisiert auf die Security-Group. Diese wird mit der Variabel angegeben.  
+Hier werden die Ports autorisiert auf die Security-Group. Diese wird mit der Variabel angegeben.
+  
 ``` 
 mkdir ~/ec2cmsdbserver
 cd ~/ec2cmsdbserver
 ```  
 Hier wird auf der Ubuntumaschine ein Verzeichnis angelegt und auch in dieses gewechselt. Das Verzeichnis dient später für die Ablage der Inital Datei des Datenbankservers.  
+  
 ```  
 touch initial.txt
 ```  
 Inital Datei wird erstellt.  
+  
 ```  
 cat > initial.txt << LAH
 #!/bin/bash
@@ -86,8 +92,25 @@ LAH
 ```  
 Hier wird die Inital Datei befüllt dazu wird der Command cat verwendet zusammen mit <<. Das LAH ist einfach ein Anfang, das Ende muss einfach gleich heissen.  
 In der Datei wird zuerst ein Update des Servers ausgelöst und dann MariaDB-Server und MariaDB-Client installiert. Mit "sudo systemctl start mariadb.service" wird sichergestellt, dass der Dienst nach der Installation wirklich läuft.  
-Damit MariaDB auch von anderen Servern erreichbar ist muss in der "50-server.cnf" Datei unter "/etc/mysql/mariadb.conf.d/"  
+Damit MariaDB auch von anderen Servern erreichbar ist muss in der "50-server.cnf" Datei unter "/etc/mysql/mariadb.conf.d/" die Bind-Address auskomentiert werden. Hier mit dem sed Command.  
+Maradb wird neu gestartet.  
+Eine Datei für die Benötigten SQL Commands wird erstellt und die Berechtigungen geändert.  
+Die Befehle werden auf gleiche Weise wie bei der Initial Datei in die Datei geschieben nur mit dem Anfang und Ende WHAM.  
+Die SQL Befehle löschen und erstellen einen User namens "wordpressusr". Das Löschen ist nötig, weil man möglicherweise auf einen Bug treffen kann der das Erstellen sonst nicht ermöglicht.  
+Es erstellt eine Datenbank "wordpress" und gibt dem User "wordpressusr" volle Recht darauf.  
+Diese SQL Datei wird dann mit dem Befehl "sudo mysql < commands.sql" ausgeführt.  
+  
+  
+Da nun alles für die EC2 Instanz des Datenbakservers vorbereitet ist, kann dieser nun installiert werden.  
+```  
+aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'
+```  
+Hier werden alle Vorherigen Dateien und Variabeln verwendet um die Angaben des Servers auszufüllen. Der Server erhält den Namestag: "cms_dataserver".  
 
+```  
+INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=cms_dataserver" --query 'Reservations[*].Instances[*].InstanceId' --output text)
+``` 
+Die Instance ID wird ausgelesen und in eine Variabel geschrieben. Wieder mit einem Filter auf den MAnen und einem Query nach der ID.  
 
 <a name="anker4"></a>
 ## 3. Anleitung  
