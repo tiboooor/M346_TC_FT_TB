@@ -43,8 +43,21 @@ Bevor das Skript "install_server3.sh" auf einer Ubuntumaschine ausgeführt werde
 - [X] Auf AWS hat es kein Key-Pair das "cms_key" heisst.  
 - [X] Die Ubuntumaschine muss eine Verbindung zu AWS haben.  
 - [X] Das Skript muss noch ausführbar gemacht werden.  
-
-
+  
+### 2. Schritt
+Skript mit  
+          ./install_server3.sh  
+  
+auf der Ubuntumaschine ausführen.  
+Beim Ausführen sollten keine Fehler auftauchen.  
+  
+### 3. Schritt  
+In der AWS Console überprüfen, das die beiden Server starten.  
+Hier bitte etwas Zeit geben (ca. 3 min), im Hintergrund wird die Datenbank eingerichtet und Wordpress installiert.  
+  
+### 4. Schritt  
+Die Öffentliche IP-Adresse des cms_webserver als http://ip-adresse eingeben. Ihr CMS geniessen.  
+Die Angabe der Sprache und die Erstellung der Seite mit Admin Login gehören schon zum Aufbau des CMS.  
   
 <a name="anker5"></a>
 ## 4. Testfälle  
