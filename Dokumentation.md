@@ -1,9 +1,10 @@
 # Dokumentation CMS-Cloudprojekt
 ![image](https://user-images.githubusercontent.com/114081005/207621040-e34b98ed-5b67-4dfd-a21b-21b2f301c048.png)
 
-In diesem Markdown wird das gesamte Projekt dokumentiert und beschrieben. In den ersten Kapitel kommen Informationen über das Projekt vor, gemeint damit sind die Wahl des Conten Management Systems und ebenfall die Aufteilung der Arbeit in der Gruppe. Im nachfolgendem Kapitel kommt eine kurze Anleitung was überhaupt alles getan werden muss um danach das Script ausführen zu können, es sind aber nicht viele Anforderungen. Danach folgt direkt die Beschreibung des funktionierenden Scripts, gefollgt von den Testfällen bei welchen 2 Scripts vorhanden sind welche Fehler beinhalten und zu guter letzt kommt unsere Reflexion. 
+In diesem Markdown wird das gesamte Projekt dokumentiert und beschrieben. In den ersten Kapitel kommen Informationen über das Projekt vor, gemeint damit sind die Wahl des Conten Management Systems und weiteres. Danach folgen die beschriebene Konfiguration und das erstellen der AWS-Instanzen und später findet man noch Testfälle auf welche während des Projekt ausgeführt worden sind.
 
-### Inhaltsverzeichnis  
+### Inhaltsverzeichnis
+
 
 [**1. Projektinformationen**](#anker)  
 [**1.1 CMS**](#anker1)  
@@ -23,11 +24,12 @@ Wir haben uns für Wordpress entschieden, da wir bereits einmal mit diesem CMS g
 
 <a name="anker2"></a>
 ### 1.2 Aufgaben und Zuständigkeit
-Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte schlussendlich automatisiert werden. Die Aufgaben haben wir untereinander so verteilt, dass sich jemand vorallem um das Projekt sorgt, sprich Github und Aws nachzuforschen und eigentlich der Support zu sein, jemand anders kümmert sich um die Scripte und die dritte Person um Github. Die Aufteilung haben wir aber schlussendlich ein wenig abgeändert, da wir in einem anderen Projekt genau die selbe Gruppe haben und so konnte sich eine Person mehr um dieses kümmern und die anderen zwei sich um das Cloud Projekt.
+Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte schlussendlich automatisiert werden. Die Aufgaben haben wir untereinander so verteilt.
 
 <a name="anker3"></a>
 ## 2. Installation und Konfiguration
 [Finale Version des Scriptes](install_server3.sh) 
+Ab hier wird angenommen, dass dieser Code schlussendlich auf einer Ubuntmaschine läuft.  
   
 ### Code Linie für Linie erklärt  
 ```  
@@ -41,6 +43,50 @@ Diese Linie erstellt eine Security-Group mit dem Namen "sec-group-cms".
 ```  
 sec_id=$(aws ec2 describe-security-groups --filters "Name=group-name,Values=sec-group-cms" --query 'SecurityGroups[*].{ID:GroupId}' --output text)
 ```  
+Hier wird die ID der vorher erstellten Security-Group in eine Variabel geschrieben. Es filtert die Security-Groups nach dem Namen und liest mit dem Query die ID aus.  
+```  
+aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 80 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 22 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 3306 --cidr 0.0.0.0/0
+aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol icmp --port -1 --cidr 0.0.0.0/0
+```  
+Hier werden die Ports autorisiert auf die Security-Group. Diese wird mit der Variabel angegeben.  
+``` 
+mkdir ~/ec2cmsdbserver
+cd ~/ec2cmsdbserver
+```  
+Hier wird auf der Ubuntumaschine ein Verzeichnis angelegt und auch in dieses gewechselt. Das Verzeichnis dient später für die Ablage der Inital Datei des Datenbankservers.  
+```  
+touch initial.txt
+```  
+Inital Datei wird erstellt.  
+```  
+cat > initial.txt << LAH
+#!/bin/bash
+
+sudo apt update
+sudo apt install -y mariadb-server
+sudo apt install -y mariadb-client
+sudo systemctl start mariadb.service
+sudo sed -i "s/bind-address            = 127.0.0.1/#bind-address            = 127.0.0.1/" /etc/mysql/mariadb.conf.d/50-server.cnf
+sudo systemctl restart mariadb.service
+sudo touch commands.sql
+sudo chmod 777 commands.sql
+sudo cat > commands.sql << WHAM
+DROP USER IF EXISTS 'wordpressusr'@'%';
+FLUSH PRIVILEGES;
+CREATE USER 'wordpressusr'@'%' IDENTIFIED BY 'pacozazi99';
+DROP DATABASE IF EXISTS wordpress;
+CREATE DATABASE wordpress;
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpressusr'@'%';
+FLUSH PRIVILEGES;
+WHAM
+sudo mysql < commands.sql
+LAH
+```  
+Hier wird die Inital Datei befüllt dazu wird der Command cat verwendet zusammen mit <<. Das LAH ist einfach ein Anfang, das Ende muss einfach gleich heissen.  
+In der Datei wird zuerst ein Update des Servers ausgelöst und dann MariaDB-Server und MariaDB-Client installiert. Mit "sudo systemctl start mariadb.service" wird sichergestellt, dass der Dienst nach der Installation wirklich läuft.  
+Damit MariaDB auch von anderen Servern erreichbar ist muss in der "50-server.cnf" Datei unter "/etc/mysql/mariadb.conf.d/"  
 
 
 <a name="anker4"></a>
