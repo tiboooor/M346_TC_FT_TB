@@ -24,7 +24,7 @@ Wir haben uns für Wordpress entschieden, da wir bereits einmal mit diesem CMS g
 
 <a name="anker2"></a>
 ### 1.2 Aufgaben und Zuständigkeit
-Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte schlussendlich automatisiert werden. Die Aufgaben haben wir untereinander so verteilt.
+Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte schlussendlich automatisiert werden. Die Aufgaben haben wir untereinander so verteilt.
 
 <a name="anker3"></a>
 ## 2. Installation und Konfiguration
@@ -40,10 +40,12 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstel
 ## 4. Testfälle  
 **Testfall 1**  
 Dieses Skript wurde 2 Mal überarbeitet. Es ist die erste Version und ich habe mich stark an einer Aufgabe von Unterricht gehalten.  
+Das Skript hat in der jetztigen Version alles sauber erstellt. Nur der Zugriff auf die Server hat nicht funktioniert.  
+Dieser Fehler kann verschiedene Ursachen haben. Einer davon ist, dass das Port öffnen in der Security Group nicht richtig gezogen hat.
   
         aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 22 --cidr 0.0.0.0/0  
   
-  
+Eine andere Ursache könnte eine Falsche konfiguration der VPC (Virtual Private Cloud) im zusammenhang mit IGW (Internet Gateway) und 
 [Testfall 1](install_server.sh)
 
 [Testfall 2](install_server2.sh)
