@@ -53,16 +53,58 @@ auf der Ubuntumaschine ausführen.
 Beim Ausführen sollten keine Fehler auftauchen.  
   
 ### 3. Schritt  
-In der AWS Console überprüfen, das die beiden Server starten.  
+In der AWS Management Console überprüfen, das die beiden Server starten.  
 Hier bitte etwas Zeit geben (ca. 3 min), im Hintergrund wird die Datenbank eingerichtet und Wordpress installiert.  
   
 ### 4. Schritt  
-Die Öffentliche IP-Adresse des cms_webserver als http://ip-adresse eingeben. Ihr CMS geniessen.  
+Die Öffentliche IP-Adresse des "cms_webserver" als http://ip-adresse eingeben. Ihr CMS geniessen.  
 Die Angabe der Sprache und die Erstellung der Seite mit Admin Login gehören schon zum Aufbau des CMS.  
+  
+### 5. Anpassungen bei Neustart eines Servers  
+Wenn der Server "cms_dataserver" neu gestartet wird, ändert sich seine IP-Adresse und der Webserver wird eine Fehlermeldung anzeigen.  
+Um die Webseite wieder richtig einzustellen muss folgendes gemacht werden:  
+1. Entweder über die AWS Management Console oder über eine SSH verbindung mit "cms_key.pem" eine Verbindung mit dem "cms_webserver" aufbauen.  
+2. Ins Verzeichnis /var/www/wordpress wechseln mit:  
+  
+    cd /var/www/wordpress
+  
+3. Die Datei "wp-config.php" mit dem bevorzugten Consoleneditor öffnen. Hier mit nano:  
+  
+    sudo nano wp-config.php
+  
+4. In der Linie:
+  
+    /** Database hostname */
+    define( 'DB_HOST', '9.240.211.19' );  
+  
+Die alte IP-Adresse zur neuen öffentlichen IP-Adresse des "cms_dataserver" ändern.  
+5. Die Änderungen in nano mit CTRL+O und CTRL+X speichern und schliessen.  
+6. Es empfiehlt sich mit:  
+  
+    sudo systemctl restart apache2
+  
+den Apache Dienst neu zu starten.  
+5. Die Webseite ist nun wieder mit der öffentlichen IP-Adresse des Webservers erreichbar.  
+  
+### 6. Löschen aller Ressourcen  
+Hier eine Liste aller Objekte die in diesem Prozess erstellt worden sind:  
+Auf AWS:  
+1. Instanz "cms_webserver"  
+2. Instanz "cms_dataserver"  
+3. Key-Pair "cms_key"  
+4. Security-Group "sec-group-cms"  
+Auf Ubuntumaschine:  
+1. unter ~/ einen Order namens "ec2cmsdbserver"  
+2. unter ~/ einen Order namens "ec2cmswebserver"  
+3. unter ~/.ssh einen Key namens "cms_key.pem"  
+  
+Diese Objekte können alle ohne Problem gelöscht werden 
   
 <a name="anker5"></a>
 ## 4. Testfälle  
-**Testfall 1**  
+**Testfall 1** 
+[Testfall 1](install_server.sh)  
+  
 Dieses Skript wurde 2 Mal überarbeitet. Es ist die erste Version und ich habe mich stark an einer Aufgabe von Unterricht gehalten.  
 Das Skript hat in der jetztigen Version alles sauber erstellt. Nur der Zugriff auf die Server hat nicht funktioniert.  
 Versuchter Zugriff mit Console direkt in AWS:
@@ -80,9 +122,10 @@ Der Port wurde aber geöffnet und die richtige Security Group dem Server zugetei
 Eine andere Ursache könnte eine Falsche konfiguration der VPC (Virtual Private Cloud) im zusammenhang mit IGW (Internet Gateway) und NACL (Network Access Control List) sein.  
 Hier ist zu beachten, dass beim schreiben dieses Skripts einfach Angaben aus der Aufgabe des Unterrichts verwendet wurden. Den ganz genauen Zusammenhang zwischen all diesen Teilen wurde nicht wirklich verstanden.  
 Weil kein richtiger Fehlerpunkt identifiziert werden konnte, wurde ein neues 2. Skript geschrieben.  
-[Testfall 1](install_server.sh)  
-
+  
 **Testfall 2**  
+[Testfall 2](install_server2.sh)  
+  
 Mit diesem Skript wurde das Vorgehen etwas abgeändert, hier wird zuerst die ID eines bereits bestehenden VPC ausgelesen.  
 Danach wird auch die ID eines bereits bestehenden Subnets ausgelesen und mit diesen Angaben die Security Group und die Instances erstellt.  
 Hier war das Problem, dass ich der Security Group nicht das Subnetz zuteilen konnte und so die Konfiguration nicht angewendet wurde.  
