@@ -34,7 +34,9 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstel
 
 <a name="anker4"></a>
 ## 3. Anleitung  
-  
+### 1. Schritt  
+Bevor das Skript install_server3.sh auf einer Ubuntumaschiene ausgeführt werden kann müssen einige Sachen überprüft werden:
+
   
 <a name="anker5"></a>
 ## 4. Testfälle  
@@ -69,7 +71,7 @@ Dieser Fehler bezieht sich ziemlich sicher auf:
         aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --vpc-id $vpc_id --subnet-id $SUBNET_ID --security-groups cms-sec-group --private-ip-address 172.31.0.100 --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'  
   
 Die Erstellung des Servers wird nämlich nicht ausgeführt.  
-Nach einigem ausprobieren wurde entschieden ein neues Skript zu schreiben.
+Nach einigem ausprobieren wurde entschieden ein neues Skript zu schreiben.  
 [Testfall 2](install_server2.sh)
   
   
