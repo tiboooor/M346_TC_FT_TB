@@ -36,13 +36,13 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstel
 ## 3. Anleitung  
 ### 1. Schritt  
 Bevor das Skript "install_server3.sh" auf einer Ubuntumaschine ausgeführt werden kann müssen einige Sachen überprüft werden:  
-[] Unter ~/.ssh hat es keinen Key der "cms_key.pem" heisst.  
-[] Unter ~/ hat es keine Ordner die "ec2cmsdbserver" oder "ec2cmswebserver" heissen.  
-[] Auf AWS hat es keine Instances die "cms_dataserver" oder "cms_webserver" heissen.  
-[] Auf AWS hat es keine Security-Group die "sec-group-cms" heisst.  
-[] Auf AWS hat es kein Key-Pair das "cms_key" heisst.  
-[] Die Ubuntumaschine muss eine Verbindung zu AWS haben.  
-[] Das Skript muss noch ausführbar gemacht werden.  
+[ ] Unter ~/.ssh hat es keinen Key der "cms_key.pem" heisst.  
+[ ] Unter ~/ hat es keine Ordner die "ec2cmsdbserver" oder "ec2cmswebserver" heissen.  
+[ ] Auf AWS hat es keine Instances die "cms_dataserver" oder "cms_webserver" heissen.  
+[ ] Auf AWS hat es keine Security-Group die "sec-group-cms" heisst.  
+[ ] Auf AWS hat es kein Key-Pair das "cms_key" heisst.  
+[ ] Die Ubuntumaschine muss eine Verbindung zu AWS haben.  
+[ ] Das Skript muss noch ausführbar gemacht werden.  
 
 
   
