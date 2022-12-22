@@ -28,7 +28,7 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstel
 
 <a name="anker3"></a>
 ## 2. Installation und Konfiguration
-[Finale Version des Scriptes](install_server3.sh) 
+[Finale Version des Scriptes](install_server3.sh)  
 Ab hier wird angenommen, dass dieser Code schlussendlich auf einer Ubuntmaschine läuft.  
   
 ### Code Linie für Linie erklärt  
