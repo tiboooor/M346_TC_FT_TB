@@ -41,7 +41,10 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstel
 **Testfall 1**  
 Dieses Skript wurde 2 Mal überarbeitet. Es ist die erste Version und ich habe mich stark an einer Aufgabe von Unterricht gehalten.  
 Das Skript hat in der jetztigen Version alles sauber erstellt. Nur der Zugriff auf die Server hat nicht funktioniert.  
-![image](https://github.com/tiboooor/M346_TC_FT_TB/blob/7afb3e8963bb6e363c1fda1e4b7b16397e31b264/Bilder/Failed_connection.PNG)
+Versuchter Zugriff mit Console direkt in AWS:
+![image](https://github.com/tiboooor/M346_TC_FT_TB/blob/7afb3e8963bb6e363c1fda1e4b7b16397e31b264/Bilder/Failed_connection.PNG)  
+Versuchter Zugriff mit SSH über Ubuntu Maschiene:  
+![image](https://github.com/tiboooor/M346_TC_FT_TB/blob/72f3841168755255a6aa0e6734fc782a7d7d40b4/Bilder/ssh_connection_refused.PNG)  
 Dieser Fehler kann verschiedene Ursachen haben. Einer davon ist, dass das Port öffnen in der Security Group nicht richtig gezogen hat.  
 Eine andere Ursache könnte eine Falsche konfiguration der VPC (Virtual Private Cloud) im zusammenhang mit IGW (Internet Gateway) und NACL (Network Access Control List) sein.  
 Hier ist zu beachten, dass beim schreiben dieses Skripts einfach Angaben aus der Aufgabe des Unterrichts verwendet wurden. Den ganz genauen Zusammenhang zwischen all diesen Teilen wurde nicht wirklich verstanden.  
