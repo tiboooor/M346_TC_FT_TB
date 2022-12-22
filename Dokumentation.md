@@ -41,11 +41,10 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstel
 **Testfall 1**  
 Dieses Skript wurde 2 Mal überarbeitet. Es ist die erste Version und ich habe mich stark an einer Aufgabe von Unterricht gehalten.  
 Das Skript hat in der jetztigen Version alles sauber erstellt. Nur der Zugriff auf die Server hat nicht funktioniert.  
-Dieser Fehler kann verschiedene Ursachen haben. Einer davon ist, dass das Port öffnen in der Security Group nicht richtig gezogen hat.
-  
-        aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 22 --cidr 0.0.0.0/0  
-  
-Eine andere Ursache könnte eine Falsche konfiguration der VPC (Virtual Private Cloud) im zusammenhang mit IGW (Internet Gateway) und 
+Dieser Fehler kann verschiedene Ursachen haben. Einer davon ist, dass das Port öffnen in der Security Group nicht richtig gezogen hat.  
+Eine andere Ursache könnte eine Falsche konfiguration der VPC (Virtual Private Cloud) im zusammenhang mit IGW (Internet Gateway) und NACL (Network Access Control List) sein.  
+Hier ist zu beachten, dass beim schreiben dieses Skripts einfach Angaben aus der Aufgabe des Unterrichts verwendet wurden. Den ganz genauen Zusammenhang zwischen all diesen Teilen wurde nicht wirklich verstanden.  
+
 [Testfall 1](install_server.sh)
 
 [Testfall 2](install_server2.sh)
