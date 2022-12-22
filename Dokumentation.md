@@ -24,9 +24,7 @@ Wir haben uns für Wordpress entschieden, da wir bereits einmal mit diesem CMS g
 
 <a name="anker2"></a>
 ### 1.2 Aufgaben und Zuständigkeit
-
-Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte letztendlich automatisiert werden. Da wir zu dritt sind geht es mit der Arbeit ziemlich gut auf. Wir haben uns so aufgeteilt das sich jemand mit aws ausseinander setzt, ein weiterer kümmert sich vorallem um die Scripte und letztlich kümmert sich jemand um das Git. Schlussendlich waren dies nur Rollen, dass was eigentlich getan wurde hat sich oft und manchmal extrem unterschieden.  
-
+Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte schlussendlich automatisiert werden. Die Aufgaben haben wir untereinander so verteilt.
 
 <a name="anker3"></a>
 ## 2. Installation und Konfiguration
@@ -62,16 +60,19 @@ Weil kein richtiger Fehlerpunkt identifiziert werden konnte, wurde ein neues 2. 
 
 **Testfall 2**  
 Mit diesem Skript wurde das Vorgehen etwas abgeändert, hier wird zuerst die ID eines bereits bestehenden VPC ausgelesen.  
-Danach wird auch die ID eines bereits bestehenden Subnets ausgelesen und mit diesen Angaben 
+Danach wird auch die ID eines bereits bestehenden Subnets ausgelesen und mit diesen Angaben die Security Group und die Instances erstellt.  
+Hier war das Problem, dass ich der Security Group nicht das Subnetz zuteilen konnte und so die Konfiguration nicht angewendet wurde.  
+Beim ausführen des Skripts sind schon Fehler aufgetaucht, da es bei der VPC Id schon Problemme gibt.  
+![image](https://github.com/tiboooor/M346_TC_FT_TB/blob/3f30741ac841b9c51327428074b1cc027752eea2/Bilder/Unknown_Option_vpc.PNG)  
+Dieser Fehler bezieht sich ziemlich sicher auf:  
+  
+        aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --vpc-id $vpc_id --subnet-id $SUBNET_ID --security-groups cms-sec-group --private-ip-address 172.31.0.100 --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_dataserver}]'  
+  
+Die Erstellung des Servers wird nämlich nicht ausgeführt.  
+Nach einigem ausprobieren wurde entschieden ein neues Skript zu schreiben.
 [Testfall 2](install_server2.sh)
   
   
 <a name="anker6"></a>
-## 5. Reflexion  
-**Tibor Blasko**  
-Das Projekt an sich, bzw. das Konzept ist sehr interessant. Die Themen sind ebenfalls alle spannend. Wir haben auch bereits im Unterricht mit AWS CLI gearbeitet, womit wir auch beim Projekt gearbeitet haben. Jedoch kam das Projekt viel zu kurzfristig und war meiner Meinung nach für diese Zeitspanne vom Umfang her zu komplex. Das hat beim SQL-Projekt besser funktioniert.  
-  
-**Franziska Tobler**  
-    
-     
-**Tiziano Corbetti**
+## 5. Reflexion
+
