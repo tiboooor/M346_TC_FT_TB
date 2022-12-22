@@ -74,7 +74,7 @@ Um die Webseite wieder richtig einzustellen muss folgendes gemacht werden:
   
 4. In der Linie:
   
-    /** Database hostname */
+    /** Database hostname */  
     define( 'DB_HOST', '9.240.211.19' );  
   
 Die alte IP-Adresse zur neuen öffentlichen IP-Adresse des "cms_dataserver" ändern.  
