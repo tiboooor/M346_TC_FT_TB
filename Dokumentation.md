@@ -46,7 +46,7 @@ Versuchter Zugriff mit Console direkt in AWS:
 Versuchter Zugriff mit SSH über Ubuntu Maschiene:  
 ![image](https://github.com/tiboooor/M346_TC_FT_TB/blob/72f3841168755255a6aa0e6734fc782a7d7d40b4/Bilder/ssh_connection_refused.PNG)  
 Dieser Fehler kann verschiedene Ursachen haben. Einer davon ist, dass das Port öffnen in der Security Group nicht richtig gezogen hat.  
-Der Port wurde aber geöffnet und die richtige Security Group dem Server Zugeteilt worden:  
+Der Port wurde aber geöffnet und die richtige Security Group dem Server zugeteilt worden:  
   
         aws ec2 create-security-group --group-name sec-group-cms --vpc-id $vpc_id --description "SSH and HTTP and 3306"  
         sec_id=$(aws ec2 describe-security-groups --filters "Name=vpc-id,Values=$vpc_id" "Name=group-name,Values=sec-group-cms" --query 'SecurityGroups[*].{ID:GroupId}' --output text)  
@@ -55,9 +55,12 @@ Der Port wurde aber geöffnet und die richtige Security Group dem Server Zugetei
   
 Eine andere Ursache könnte eine Falsche konfiguration der VPC (Virtual Private Cloud) im zusammenhang mit IGW (Internet Gateway) und NACL (Network Access Control List) sein.  
 Hier ist zu beachten, dass beim schreiben dieses Skripts einfach Angaben aus der Aufgabe des Unterrichts verwendet wurden. Den ganz genauen Zusammenhang zwischen all diesen Teilen wurde nicht wirklich verstanden.  
+Weil kein richtiger Fehlerpunkt identifiziert werden konnte, wurde ein neues 2. Skript geschrieben.  
+[Testfall 1](install_server.sh)  
 
-[Testfall 1](install_server.sh)
-
+**Testfall 2**  
+Mit diesem Skript wurde das Vorgehen etwas abgeändert, hier wird zuerst die ID eines bereits bestehenden VPC ausgelesen.  
+Danach wird auch die ID eines bereits bestehenden Subnets ausgelesen und mit diesen Angaben 
 [Testfall 2](install_server2.sh)
   
   
