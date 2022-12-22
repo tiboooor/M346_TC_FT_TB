@@ -66,13 +66,16 @@ Um die Webseite wieder richtig einzustellen muss folgendes gemacht werden:
 1. Entweder über die AWS Management Console oder über eine SSH verbindung mit "cms_key.pem" eine Verbindung mit dem "cms_webserver" aufbauen.  
 2. Ins Verzeichnis /var/www/wordpress wechseln mit:  
   
+  
     cd /var/www/wordpress  
   
 3. Die Datei "wp-config.php" mit dem bevorzugten Consoleneditor öffnen. Hier mit nano:  
   
+  
     sudo nano wp-config.php
   
 4. In der Linie:
+  
   
     /** Database hostname */  
     define( 'DB_HOST', '9.240.211.19' );  
