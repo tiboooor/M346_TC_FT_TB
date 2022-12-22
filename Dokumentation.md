@@ -90,7 +90,7 @@ WHAM
 sudo mysql < commands.sql
 LAH
 ```  
-Hier wird die Inital Datei befüllt dazu wird der Command cat verwendet zusammen mit <<. Das LAH ist einfach ein Anfang, das Ende muss einfach gleich heissen.  
+Hier wird die Inital Datei befüllt, dazu wird der Command cat verwendet zusammen mit <<. Das LAH ist einfach ein Anfang, das Ende muss einfach gleich heissen.  
 In der Datei wird zuerst ein Update des Servers ausgelöst und dann MariaDB-Server und MariaDB-Client installiert. Mit "sudo systemctl start mariadb.service" wird sichergestellt, dass der Dienst nach der Installation wirklich läuft.  
 Damit MariaDB auch von anderen Servern erreichbar ist muss in der "50-server.cnf" Datei unter "/etc/mysql/mariadb.conf.d/" die Bind-Address auskomentiert werden. Hier mit dem sed Command.  
 Maradb wird neu gestartet.  
