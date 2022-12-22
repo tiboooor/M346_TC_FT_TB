@@ -92,7 +92,9 @@ Auf AWS:
 1. Instanz "cms_webserver"  
 2. Instanz "cms_dataserver"  
 3. Key-Pair "cms_key"  
-4. Security-Group "sec-group-cms"  
+4. Security-Group "sec-group-cms"
+  
+  
 Auf Ubuntumaschine:  
 1. unter ~/ einen Order namens "ec2cmsdbserver"  
 2. unter ~/ einen Order namens "ec2cmswebserver"  
