@@ -68,17 +68,20 @@ Um die Webseite wieder richtig einzustellen muss folgendes gemacht werden:
   
   
     cd /var/www/wordpress  
+
   
 3. Die Datei "wp-config.php" mit dem bevorzugten Consoleneditor öffnen. Hier mit nano:  
   
   
     sudo nano wp-config.php
   
+  
 4. In der Linie:
   
   
     /** Database hostname */  
     define( 'DB_HOST', '9.240.211.19' );  
+  
   
 Die alte IP-Adresse zur neuen öffentlichen IP-Adresse des "cms_dataserver" ändern.  
 5. Die Änderungen in nano mit CTRL+O und CTRL+X speichern und schliessen.  
