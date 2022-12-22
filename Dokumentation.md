@@ -66,7 +66,7 @@ Um die Webseite wieder richtig einzustellen muss folgendes gemacht werden:
 1. Entweder über die AWS Management Console oder über eine SSH verbindung mit "cms_key.pem" eine Verbindung mit dem "cms_webserver" aufbauen.  
 2. Ins Verzeichnis /var/www/wordpress wechseln mit:  
   
-    cd /var/www/wordpress
+    cd /var/www/wordpress  
   
 3. Die Datei "wp-config.php" mit dem bevorzugten Consoleneditor öffnen. Hier mit nano:  
   
@@ -81,7 +81,7 @@ Die alte IP-Adresse zur neuen öffentlichen IP-Adresse des "cms_dataserver" änd
 5. Die Änderungen in nano mit CTRL+O und CTRL+X speichern und schliessen.  
 6. Es empfiehlt sich mit:  
   
-    sudo systemctl restart apache2
+    sudo systemctl restart apache2  
   
 den Apache Dienst neu zu starten.  
 5. Die Webseite ist nun wieder mit der öffentlichen IP-Adresse des Webservers erreichbar.  
@@ -103,7 +103,6 @@ Diese Objekte können alle ohne Problem gelöscht werden
 <a name="anker5"></a>
 ## 4. Testfälle  
 **Testfall 1** 
-[Testfall 1](install_server.sh)  
   
 Dieses Skript wurde 2 Mal überarbeitet. Es ist die erste Version und ich habe mich stark an einer Aufgabe von Unterricht gehalten.  
 Das Skript hat in der jetztigen Version alles sauber erstellt. Nur der Zugriff auf die Server hat nicht funktioniert.  
@@ -122,9 +121,9 @@ Der Port wurde aber geöffnet und die richtige Security Group dem Server zugetei
 Eine andere Ursache könnte eine Falsche konfiguration der VPC (Virtual Private Cloud) im zusammenhang mit IGW (Internet Gateway) und NACL (Network Access Control List) sein.  
 Hier ist zu beachten, dass beim schreiben dieses Skripts einfach Angaben aus der Aufgabe des Unterrichts verwendet wurden. Den ganz genauen Zusammenhang zwischen all diesen Teilen wurde nicht wirklich verstanden.  
 Weil kein richtiger Fehlerpunkt identifiziert werden konnte, wurde ein neues 2. Skript geschrieben.  
+[Testfall 1](install_server.sh)  
   
 **Testfall 2**  
-[Testfall 2](install_server2.sh)  
   
 Mit diesem Skript wurde das Vorgehen etwas abgeändert, hier wird zuerst die ID eines bereits bestehenden VPC ausgelesen.  
 Danach wird auch die ID eines bereits bestehenden Subnets ausgelesen und mit diesen Angaben die Security Group und die Instances erstellt.  
@@ -137,7 +136,7 @@ Dieser Fehler bezieht sich ziemlich sicher auf:
   
 Die Erstellung des Servers wird nämlich nicht ausgeführt.  
 Nach einigem ausprobieren wurde entschieden ein neues Skript zu schreiben.  
-[Testfall 2](install_server2.sh)
+[Testfall 2](install_server2.sh)  
   
   
 <a name="anker6"></a>
