@@ -40,7 +40,10 @@ Für das Projekt muss ein Content-Management-System auf einer AWS-instanz erstel
 ## 4. Testfälle  
 **Testfall 1**  
 Dieses Skript wurde 2 Mal überarbeitet. Es ist die erste Version und ich habe mich stark an einer Aufgabe von Unterricht gehalten.  
-
+  
+        aws ec2 authorize-security-group-ingress --group-id $sec_id --protocol tcp --port 22 --cidr 0.0.0.0/0  
+  
+  
 [Testfall 1](install_server.sh)
 
 [Testfall 2](install_server2.sh)
