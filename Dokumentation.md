@@ -1,10 +1,9 @@
 # Dokumentation CMS-Cloudprojekt
 ![image](https://user-images.githubusercontent.com/114081005/207621040-e34b98ed-5b67-4dfd-a21b-21b2f301c048.png)
 
-In diesem Markdown wird das gesamte Projekt dokumentiert und beschrieben. In den ersten Kapitel kommen Informationen über das Projekt vor, gemeint damit sind die Wahl des Conten Management Systems und weiteres. Danach folgen die beschriebene Konfiguration und das erstellen der AWS-Instanzen und später findet man noch Testfälle auf welche während des Projekt ausgeführt worden sind.
+In diesem Markdown wird das gesamte Projekt dokumentiert und beschrieben. In den ersten Kapitel kommen Informationen über das Projekt vor, gemeint damit sind die Wahl des Conten Management Systems und ebenfall die Aufteilung der Arbeit in der Gruppe. Im nachfolgendem Kapitel kommt eine kurze Anleitung was überhaupt alles getan werden muss um danach das Script ausführen zu können, es sind aber nicht viele Anforderungen. Danach folgt direkt die Beschreibung des funktionierenden Scripts, gefollgt von den Testfällen bei welchen 2 Scripts vorhanden sind welche Fehler beinhalten und zu guter letzt kommt unsere Reflexion. 
 
-### Inhaltsverzeichnis
-
+### Inhaltsverzeichnis  
 
 [**1. Projektinformationen**](#anker)  
 [**1.1 CMS**](#anker1)  
@@ -24,7 +23,7 @@ Wir haben uns für Wordpress entschieden, da wir bereits einmal mit diesem CMS g
 
 <a name="anker2"></a>
 ### 1.2 Aufgaben und Zuständigkeit
-Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte schlussendlich automatisiert werden. Die Aufgaben haben wir untereinander so verteilt.
+Für das Projekt muss ein Content-Management-System auf einer AWS-Instanz erstellen, zudem muss die Datenbank in einer anderen Instanz vorhanden sein. Zwischendurch sollten Tests ausgeführt werden und sauber in der Dokumentation sein. Das Projekt sollte schlussendlich automatisiert werden. Die Aufgaben haben wir untereinander so verteilt, dass sich jemand vorallem um das Projekt sorgt, sprich Github und Aws nachzuforschen und eigentlich der Support zu sein, jemand anders kümmert sich um die Scripte und die dritte Person um Github. Die Aufteilung haben wir aber schlussendlich ein wenig abgeändert, da wir in einem anderen Projekt genau die selbe Gruppe haben und so konnte sich eine Person mehr um dieses kümmern und die anderen zwei sich um das Cloud Projekt.
 
 <a name="anker3"></a>
 ## 2. Installation und Konfiguration
