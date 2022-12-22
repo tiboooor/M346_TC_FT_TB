@@ -46,7 +46,8 @@ Bevor das Skript "install_server3.sh" auf einer Ubuntumaschine ausgeführt werde
   
 ### 2. Schritt
 Skript mit  
-          ./install_server3.sh  
+  
+        ./install_server3.sh  
   
 auf der Ubuntumaschine ausführen.  
 Beim Ausführen sollten keine Fehler auftauchen.  
