@@ -121,7 +121,7 @@ Der Port wurde aber geöffnet und die richtige Security Group dem Server zugetei
 Eine andere Ursache könnte eine Falsche konfiguration der VPC (Virtual Private Cloud) im zusammenhang mit IGW (Internet Gateway) und NACL (Network Access Control List) sein.  
 Hier ist zu beachten, dass beim schreiben dieses Skripts einfach Angaben aus der Aufgabe des Unterrichts verwendet wurden. Den ganz genauen Zusammenhang zwischen all diesen Teilen wurde nicht wirklich verstanden.  
 Weil kein richtiger Fehlerpunkt identifiziert werden konnte, wurde ein neues 2. Skript geschrieben.  
-[Testfall 1](install_server.sh)  
+[Script zu Testfall 1](install_server.sh)  
   
 **Testfall 2**  
   
@@ -136,7 +136,7 @@ Dieser Fehler bezieht sich ziemlich sicher auf:
   
 Die Erstellung des Servers wird nämlich nicht ausgeführt.  
 Nach einigem ausprobieren wurde entschieden ein neues Skript zu schreiben.  
-[Testfall 2](install_server2.sh)  
+[Script zu Testfall 2](install_server2.sh)  
   
   
 <a name="anker6"></a>
