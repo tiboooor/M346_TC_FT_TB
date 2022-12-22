@@ -98,7 +98,7 @@ Auf Ubuntumaschine:
 2. unter ~/ einen Order namens "ec2cmswebserver"  
 3. unter ~/.ssh einen Key namens "cms_key.pem"  
   
-Diese Objekte können alle ohne Problem gelöscht werden 
+Diese Objekte können alle ohne Problem gelöscht werden, um die Security-Group zu löschen muss zuerst sichergestellt sein, dass die Instances komplett terminiert sind.
   
 <a name="anker5"></a>
 ## 4. Testfälle  
