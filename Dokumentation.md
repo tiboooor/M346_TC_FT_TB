@@ -110,7 +110,58 @@ Hier werden alle Vorherigen Dateien und Variabeln verwendet um die Angaben des S
 ```  
 INSTANCE_ID=$(aws ec2 describe-instances --filters "Name=tag:Name,Values=cms_dataserver" --query 'Reservations[*].Instances[*].InstanceId' --output text)
 ``` 
-Die Instance ID wird ausgelesen und in eine Variabel geschrieben. Wieder mit einem Filter auf den MAnen und einem Query nach der ID.  
+Die Instance ID wird ausgelesen und in eine Variabel geschrieben. Wieder mit einem Filter auf den Namen und einem Query nach der ID.  
+  
+``` 
+PUBLIC_IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID --query 'Reservations[0].Instances[0].PublicIpAddress' --output text)
+```  
+Die öffentliche IP-Adresse wird in eine Variabel geschrieben, nach der richtigen Instance wird mithilfe der Variabel INSTANCE_ID gefiltert. Der Query gibt dann nur die IP-Adresse aus.  
+  
+``` 
+mkdir ~/ec2cmswebserver  
+cd ~/ec2cmswebserver
+``` 
+Hier wird als Vorbereitung für den Webserver ein Ordner erstellt und dahin gewechselt. Der Ordner ist wieder für die aufbewahrung der Inital Datei.  
+  
+```
+touch initial.txt
+```  
+Inital Datei wird erstellt.  
+  
+```  
+table_prefix='$table_prefix'
+``` 
+Hier wird der Wert $table_prefix in die Variabel table_prefix geschrieben. Das ist so nötig, weil später eine Konfigurationsdatei erstellt wird die von sich aus diese Variabel gesetzt hat. Wenn man sie hier nicht deklariert, wird sie in der Datei nicht geschrieben.  
+  
+``` 
+cat > initial.txt << END 
+#!/bin/bash
+
+sudo apt update
+sudo apt install -y apache2
+
+sudo apt install php php-mysql -y
+sudo apt install mysql-client -y
+
+wget https://wordpress.org/latest.tar.gz
+tar xzf latest.tar.gz
+sudo cp -R wordpress /var/www/
+sudo chown -R www-data:www-data /var/www/wordpress/
+sudo chmod -R 755 /var/www/wordpress/
+sudo mkdir /var/www/wordpress/wp-content/uploads
+sudo chown -R www-data:www-data /var/www/wordpress/wp-content/uploads/
+table_prefix='$table_prefix'
+
+cd /var/www/wordpress
+sudo touch wp-config.php
+sudo cat > wp-config.php << EOF  
+```  
+Die Inital Datei des Webservers wird befüllt.  
+Der Server macht ein Update und installiert Apache. Für das CMS Wordpress muss noch php und php-mysql installiert werden. Der mysql-client wird theoretisch nicht benötigt.  
+Danach wird die neuste Version von Wordpress heruntergeladen und mit tar extrahiert. Die Dateien werden dann in das Verzeichnis /var/www verschoben.  
+Hier werden die Berechtigungen angepasst und benötigte Ordner erstellt.  
+Auch hier ist die Variabel table_prefix nochmals deklariert, dass sie dann auch richtig in die nachfolgend erstellte wp-config Datei geschrieben wird.  
+Diese wp-config.php Datei wird erstellt und dann mit Inhalt befüllt.  
 
 <a name="anker4"></a>
 ## 3. Anleitung  
