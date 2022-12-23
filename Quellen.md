@@ -7,7 +7,7 @@ https://www.markdownguide.org/basic-syntax/#paragraphs-1
 Titelbild Dokumentation.md:  
 https://blog.hubspot.com/blog/tabid/6307/bid/7969/what-is-a-cms-and-why-should-you-care.aspx
 
-Github:
+Github:  
 https://www.markdownguide.org/basic-syntax/#paragraphs-1  
 https://github.com/FriendsOfREDAXO/markitup/blob/master/plugins/documentation/docs/de_de/howto_markdown.md  
 https://github.blog/2014-04-28-task-lists-in-all-markdown-documents/  
