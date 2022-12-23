@@ -13,3 +13,7 @@ https://github.com/FriendsOfREDAXO/markitup/blob/master/plugins/documentation/do
 https://github.blog/2014-04-28-task-lists-in-all-markdown-documents/  
 https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks  
 https://www.ionos.de/digitalguide/websites/web-entwicklung/markdown/  
+
+AWS CLI Code:  
+https://docs.aws.amazon.com/cli/latest/index.html  
+https://geekdudes.wordpress.com/2020/07/16/linux-bash-script-for-creating-and-configuring-maria-database/
