@@ -330,6 +330,12 @@ Nach einigem ausprobieren wurde entschieden ein neues Skript zu schreiben.
 Das Projekt an sich, bzw. das Konzept ist sehr interessant. Die Themen sind ebenfalls alle spannend. Wir haben auch bereits im Unterricht mit AWS CLI gearbeitet, womit wir auch beim Projekt gearbeitet haben. Jedoch kam das Projekt viel zu kurzfristig und war meiner Meinung nach für diese Zeitspanne vom Umfang her zu komplex. Das hat beim SQL-Projekt besser funktioniert.  
   
 **Franziska Tobler**  
-    
-     
+Dieses Projekt hat mich richtig herausgefordert. Ich habe den Teil des Code schreibens übernommen und das hat mir Spass gemacht.  
+Angefangen hat das Projekt ziemlich harmlos, ich dachte noch, dass wird einfach, da wir im Unterricht schon ein paar AWS CLI Commands gebraucht haben.  
+Oh habe ich mich geirrt, ich habe sehr viel Zeit investiert nur um kleine Fehler zu beheben. Der Grundaufbau des Skrips habe ich 4mal überarbeitet, nur um dann den grössten Teil wieder zu löschen..  
+Zum Glück konnte ich in meinem Betrieb den Code gegenlesen lassen und so sind einige Fehler behoben worden.  
+Das Projekt im ganzen, für mich hat die Vorbereitung für das Projekt nicht gereicht das Projekt ohne Probleme zu erledigen.  
+Was mir gefehlt hat, waren Erklärungen bezüglich dem Netzwerkaufbau in AWS, wie das ganze mit Serverregionen etc. funktioniert.  
+
+
 **Tiziano Corbetti**
