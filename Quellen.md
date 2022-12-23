@@ -1,8 +1,15 @@
 Titelbild in README.md:   
-https://d2908q01vomqb2.cloudfront.net/a9334987ece78b6fe8bf130ef00b74847c1d3da6/2021/06/09/Site-Merch_B9_FleetDeployment_SocialMedia_1-1024x536.png   
+https://aws.amazon.com/blogs/robotics/category/post-types/technical-how-to/ 
 
 Markdown Syntax:   
 https://www.markdownguide.org/basic-syntax/#paragraphs-1   
 
 Titelbild Dokumentation.md:  
 https://blog.hubspot.com/blog/tabid/6307/bid/7969/what-is-a-cms-and-why-should-you-care.aspx
+
+Github:
+https://www.markdownguide.org/basic-syntax/#paragraphs-1  
+https://github.com/FriendsOfREDAXO/markitup/blob/master/plugins/documentation/docs/de_de/howto_markdown.md  
+https://github.blog/2014-04-28-task-lists-in-all-markdown-documents/  
+https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks  
+https://www.ionos.de/digitalguide/websites/web-entwicklung/markdown/  
