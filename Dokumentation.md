@@ -194,7 +194,21 @@ sudo a2dissite 000-default.conf
 sudo systemctl restart apache2
 END
 ```  
-Am Ende der inital Datei des Webservers wird die wp-config Datei noch ausführbar gemacht. 
+Am Ende der inital Datei des Webservers wird die wp-config Datei noch ausführbar gemacht.  
+Damit die Wordpress Seite direkt aufgerufen wird, erstellt man im /etc/apache2/sites-available Verzeichnis eine neue conf Datei.  
+Darin spezifiziert man wo die Index Datei ist. Hier ist es im Verzeichnis /var/www/wordpress.  
+Im Titel deklariert man auch über welchen Port die Adresse aufgerufen werden kann.  
+Diese neue conf Datei wirt mit a2ensite aktiviert und die alte mit a2dissite deaktiviert. Nach diesen anpassungen muss der Apache Dienst neu gestartet werden.  
+  
+```  
+aws ec2 run-instances --image-id ami-08c40ec9ead489470 --count 1 --instance-type t2.micro --key-name cms_key --security-group-ids $sec_id --iam-instance-profile Name=LabInstanceProfile --user-data file://initial.txt --tag-specifications 'ResourceType=instance,Tags=[{Key=Name,Value=cms_webserver}]'
+```  
+Die ganze Vorbeitung wird nun Verwendet um die Instanz für den Webserver zu erstellen. Diese Instanz wird gleich wie die Instanz des Datenbankservers erstellt aber mit dem Namen "cms_webserver".  
+  
+  ```  
+  chmod 600 ~/.ssh/cms_key.pem  
+  ```  
+  Als aller letztes werden die Berechtigungen für dem Key angepasst, so dass er verwendet werden kann.  
 
 <a name="anker4"></a>
 ## 3. Anleitung  
