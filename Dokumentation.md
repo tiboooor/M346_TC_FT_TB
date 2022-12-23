@@ -162,6 +162,39 @@ Danach wird die neuste Version von Wordpress heruntergeladen und mit tar extrahi
 Hier werden die Berechtigungen angepasst und benötigte Ordner erstellt.  
 Auch hier ist die Variabel table_prefix nochmals deklariert, dass sie dann auch richtig in die nachfolgend erstellte wp-config Datei geschrieben wird.  
 Diese wp-config.php Datei wird erstellt und dann mit Inhalt befüllt.  
+In der wp-config sind nur wenige Linien relevant:  
+```  
+/** The name of the database for WordPress */
+define( 'DB_NAME', 'wordpress' );
+
+/** Database username */
+define( 'DB_USER', 'wordpressusr' );
+
+/** Database password */
+define( 'DB_PASSWORD', 'pacozazi99' );
+
+/** Database hostname */
+define( 'DB_HOST', '$PUBLIC_IP' );  
+``` 
+Hier werden die Angaben von oben direkt eingetragen. Der Hostname der Datenbank ist die öffentliche IP-Adresse und wird mit der Variabel geschrieben.  
+In dieser Datei werden auch "Authentication unique keys and salts" eingetragen, diese können mit dem Link in der Beschreibung des Abschnittes generiert werden.  
+  
+```  
+sudo chmod 755 wp-config.php
+cd /etc/apache2/sites-available
+sudo touch wordpress.conf
+sudo chmod 666 wordpress.conf
+sudo cat > wordpress.conf << FOO
+<VirtualHost *:80>
+        DocumentRoot /var/www/wordpress
+</VirtualHost>
+FOO
+sudo a2ensite wordpress.conf
+sudo a2dissite 000-default.conf
+sudo systemctl restart apache2
+END
+```  
+Am Ende der inital Datei des Webservers wird die wp-config Datei noch ausführbar gemacht. 
 
 <a name="anker4"></a>
 ## 3. Anleitung  
