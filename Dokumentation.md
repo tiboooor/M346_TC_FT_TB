@@ -1,7 +1,7 @@
 # Dokumentation CMS-Cloudprojekt
 ![image](https://user-images.githubusercontent.com/114081005/207621040-e34b98ed-5b67-4dfd-a21b-21b2f301c048.png)
 
-In diesem Markdown wird das gesamte Projekt dokumentiert und beschrieben. In den ersten Kapitel kommen Informationen über das Projekt vor, gemeint damit sind die Wahl des Conten Management Systems und weiteres. 
+In diesem Markdown wird das gesamte Projekt dokumentiert und beschrieben. In den ersten Kapitel kommen Informationen über das Projekt vor, gemeint damit sind die Wahl des Conten Management Systems und weiteres. Ebenfalls folgt eine Anleitung und eine Dokumentation über das Projekt und noch Testfälle mit Scripts welche nicht funktioniert haben, diese kommen auch mit einer Begründung wieso diese nicht funktioniert haben
 ### Inhaltsverzeichnis
 
 
@@ -14,7 +14,7 @@ In diesem Markdown wird das gesamte Projekt dokumentiert und beschrieben. In den
 [**5. Reflexion**](#anker6)
 <a name="anker"></a>
 ## 1. Projektinformationen
-In diesem Abschnitt wird die Wahl des CMS beschrieben und die verschiedenen Aufgaben aufgezählt und wer Zuständigkeit für was hat.  Ebenfalls folgt eine Anleitung und eine Dokumentation über das Prijekt und noch Testfälle mit Scripts welche nicht funktioniert haben und mit Begründung wieso.
+In diesem Abschnitt wird die Wahl des CMS beschrieben und die verschiedenen Aufgaben aufgezählt und wer Zuständigkeit für was hat.  
 
 <a name="anker1"></a>
 ### 1.1 CMS  
