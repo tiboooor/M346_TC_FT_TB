@@ -17,3 +17,4 @@ https://www.ionos.de/digitalguide/websites/web-entwicklung/markdown/
 AWS CLI Code:  
 https://docs.aws.amazon.com/cli/latest/index.html  
 https://geekdudes.wordpress.com/2020/07/16/linux-bash-script-for-creating-and-configuring-maria-database/
+https://www.domaintechnik.at/wordpress-installieren.html#c25579
