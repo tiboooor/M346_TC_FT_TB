@@ -209,6 +209,8 @@ Die ganze Vorbeitung wird nun Verwendet um die Instanz für den Webserver zu ers
   chmod 600 ~/.ssh/cms_key.pem  
   ```  
   Als aller letztes werden die Berechtigungen für dem Key angepasst, so dass er verwendet werden kann.  
+    
+   
 
 <a name="anker4"></a>
 ## 3. Anleitung  
