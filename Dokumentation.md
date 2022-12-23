@@ -339,3 +339,4 @@ Was mir gefehlt hat, waren Erklärungen bezüglich dem Netzwerkaufbau in AWS, wi
 
 
 **Tiziano Corbetti**
+Das AWS-Projekt war eigentlich interessant, nur fehlte es an allem. Nicht nur hatten wir kein richtig grosses Vorwissen, sondern wir mussten mit Git arbeiten, was wir denke ich einmal weniger als 8 Lektionen bisher verwendet haben. Zudem war die Zeit absolut knapp und eine Woche hätte sicherlich gutgetan. Dies habe ich bemerkt als wir die 4 Lektionen erhalten haben. Jedoch gab es auch etwas Gutes, man konnte es so machen wie man es wollte, solange es funktionierte und man hatte eine gute Projektwahl denke ich. Leider waren die Projekte aber meist zu wenig beschrieben und man musste die Lehrperson ausquetschen. Schlussendlich wurden wir wenigstens fertig, jedoch war es eigentlich zu viel.
